@@ -7,8 +7,17 @@ import {
   Text
 } from 'react-vr'
 
+import Shape from './vr/components/Shape'
+
 
 export default class VRGame extends Component {
+
+  constructor(props){
+    super(props)
+    this.state={
+      gameShapes: [1,1,1,1]
+    }
+  }
 
   render(){
     return (
@@ -19,6 +28,13 @@ export default class VRGame extends Component {
         >
           Find The Odd Shape
         </Text>
+
+        <Shape
+          shapeNumber={0}
+          transform={[
+            {translate:[0,0,-5]}
+          ]}
+        />
 
       </View>
     )
