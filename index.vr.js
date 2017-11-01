@@ -17,6 +17,22 @@ export default class VRGame extends Component {
     this.state={
       gameShapes: [1,1,1,1]
     }
+    this.renderShapes = this.renderShapes.bind(this)
+  }
+
+  renderShapes(){
+    return this.state.gameShapes.map((shape,index)=>{
+      return (
+        <View key={index}>
+          <Shape
+            shapeNumber={shape}
+            transform={[
+              {translate: [(index-1.5)*1.5,0,-5]}
+            ]}
+          />
+        </View>
+      )
+    })
   }
 
   render(){
@@ -29,12 +45,7 @@ export default class VRGame extends Component {
           Find The Odd Shape
         </Text>
 
-        <Shape
-          shapeNumber={0}
-          transform={[
-            {translate:[0,0,-5]}
-          ]}
-        />
+        {this.renderShapes()}
 
       </View>
     )
