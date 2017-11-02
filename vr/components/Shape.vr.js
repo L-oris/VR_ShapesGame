@@ -7,17 +7,18 @@ import {
 
 
 const shapes = [Box,Sphere,Cylinder]
+const colors = ['red','green','blue','#ccc']
 
 
 export default class Shape extends Component {
 
   render(){
     let ShapeComponent = shapes[this.props.shapeNumber]
-    
+
     return (
       <ShapeComponent
         style={{
-          color: 'white',
+          color: colors[this.props.colorNumber],
           transform: this.props.transform
         }}
       />

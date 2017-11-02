@@ -4,8 +4,9 @@ import {
   asset,
   StyleSheet,
   View,
-  Text
+  Text,
 } from 'react-vr'
+
 
 import Shape from './vr/components/Shape'
 
@@ -26,6 +27,7 @@ export default class VRGame extends Component {
         <View key={index}>
           <Shape
             shapeNumber={shape}
+            colorNumber={index}
             transform={[
               {translate: [(index-1.5)*1.5,0,-5]}
             ]}
@@ -37,7 +39,7 @@ export default class VRGame extends Component {
 
   render(){
     return (
-      <View>
+      <View style={styles.game}>
 
         <Text
           style={styles.text}
@@ -55,6 +57,13 @@ export default class VRGame extends Component {
 
 
 const styles = StyleSheet.create({
+
+  game: {
+    transform: [
+      {translate: [-2,0,0]}
+    ]
+  },
+
   text: {
     fontSize: 0.5,
     textAlign: 'center',
@@ -63,6 +72,7 @@ const styles = StyleSheet.create({
       {translate:[0,0.5,-3]}
     ]
   }
+
 })
 
 
