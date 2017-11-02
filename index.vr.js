@@ -8,7 +8,7 @@ import {
 } from 'react-vr'
 
 
-import Shape from './vr/components/Shape'
+import Shape, {shapes} from './vr/components/Shape'
 
 
 export default class VRGame extends Component {
@@ -19,6 +19,29 @@ export default class VRGame extends Component {
       gameShapes: [1,1,1,1]
     }
     this.renderShapes = this.renderShapes.bind(this)
+  }
+
+  componentDidMount(){
+    this.newGameSet()
+  }
+
+  newGameSet(){
+    const baseShapeId = Math.floor(Math.random()*shapes.length)
+
+    let specialShapeId = baseShapeId
+    while(specialShapeId===baseShapeId){
+      specialShapeId = Math.floor(Math.random()*shapes.length)
+    }
+
+    const newGameShapes = []
+    for(let i=0;i<this.state.gameShapes.length;i++){
+      newGameShapes.push(baseShapeId)
+    }
+    
+    const specialIndex = Math.floor(Math.random()*newGameShapes.length)
+    newGameShapes[specialIndex] = specialShapeId
+
+    console.log(`new special array --> ${newGameShapes}`)
   }
 
   renderShapes(){

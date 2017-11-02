@@ -10,6 +10,8 @@ const shapes = [Box,Sphere,Cylinder]
 const colors = ['red','green','blue','#ccc']
 
 
+export {shapes}
+
 export default class Shape extends Component {
 
   render(){
