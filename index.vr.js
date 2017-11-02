@@ -16,9 +16,12 @@ export default class VRGame extends Component {
   constructor(props){
     super(props)
     this.state={
-      gameShapes: [1,1,1,1]
+      gameShapes: [1,1,1,1],
+      specialIndex: 0,
+      score: 0
     }
     this.renderShapes = this.renderShapes.bind(this)
+    this.newGameSet = this.newGameSet.bind(this)
   }
 
   componentDidMount(){
@@ -37,17 +40,34 @@ export default class VRGame extends Component {
     for(let i=0;i<this.state.gameShapes.length;i++){
       newGameShapes.push(baseShapeId)
     }
-    
+
     const specialIndex = Math.floor(Math.random()*newGameShapes.length)
+
     newGameShapes[specialIndex] = specialShapeId
 
-    console.log(`new special array --> ${newGameShapes}`)
+    this.setState({
+      gameShapes: newGameShapes,
+      specialIndex
+    })
+  }
+
+  pickShape(shapeIndex){
+    let {specialIndex,score} = this.state
+
+    shapeIndex===specialIndex
+    ? score += 1
+    : score -= 1
+
+    this.setState({
+      score
+    })
+
   }
 
   renderShapes(){
     return this.state.gameShapes.map((shape,index)=>{
       return (
-        <View key={index}>
+        <View key={index} onEnter={e=>this.pickShape(index)}>
           <Shape
             shapeNumber={shape}
             colorNumber={index}
@@ -64,10 +84,12 @@ export default class VRGame extends Component {
     return (
       <View style={styles.game}>
 
-        <Text
-          style={styles.text}
-        >
+        <Text style={styles.text}>
           Find The Odd Shape
+        </Text>
+
+        <Text style={styles.text}>
+          Score: {this.state.score}
         </Text>
 
         {this.renderShapes()}
@@ -92,7 +114,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: 'white',
     transform: [
-      {translate:[0,0.5,-3]}
+      {translate:[0,1,-3]}
     ]
   }
 
