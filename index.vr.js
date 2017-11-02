@@ -5,6 +5,7 @@ import {
   StyleSheet,
   View,
   Text,
+  AsyncStorage
 } from 'react-vr'
 
 
@@ -25,6 +26,13 @@ export default class VRGame extends Component {
   }
 
   componentDidMount(){
+
+    AsyncStorage.getItem('score')
+    .then(value=>{
+      console.log(`score --> ${value}`);
+      this.setState({score: value})
+    })
+
     this.newGameSet()
   }
 
@@ -61,6 +69,11 @@ export default class VRGame extends Component {
     this.setState({
       score
     })
+
+    AsyncStorage.setItem('score',score)
+
+    //start new game
+    this.newGameSet()
 
   }
 
